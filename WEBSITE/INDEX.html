@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESTAURANT</title>
+    <link rel="stylesheet" href="style_for_website.css">
+</head>
+<body>
+    <!-- <canvas id="websitecanvas" height="700" width="700"></canvas> -->
+    <nav>
+
+        <ul>
+
+            <li><a href="TABLE.html">OUR MENU</a></li>
+            <li><a href="ABOUT.html">ABOUT US</a></li>
+            <li><a href="STORE HOURS.html">STORE HOURS</a></li>
+            <li><a href="LOCATION.html">LOCATION</a></li>
+               
+        </ul>
+            
+    </nav>   
+
+    <center><h1>WELCOME TO DIVINEX EATRIES</h1></center>
+
+    <canvas id="steamCanvas" width="400" height="300"></canvas>
+
+    <center><p style="color: black; font-weight: bold; font-family: fantasy;">A PLACE WHERE FOOD IS MADE AT ITS BEST</p> </center>   
+       
+     <br><hr style="background-color: black;"><br><br>
+
+    <!-- <img src="IMAGES/pizza.jpg" alt="" width="400" height="400"> -->
+
+    <center><a href="login.html">CLICK HERE TO SIGN-UP</a></center>
+
+    <script>
+        var canvas = document.getElementById("steamCanvas");
+        var ctx = canvas.getContext("2d");
+
+        var steamParticles = [];
+        for (var i = 0; i < 20; i++) {
+        steamParticles.push({ x: 200, y: 250, radius: 5 + Math.random() * 5, speed: 0.5 + Math.random() });
+        }
+
+        function drawBowl() {
+          ctx.fillStyle = "#d2691e"; // brown bowl
+          ctx.beginPath();
+          ctx.arc(200, 250, 80, Math.PI, 2 * Math.PI);
+          ctx.fill();
+        }
+
+        function drawSteam() {
+        ctx.fillStyle = "rgba(255,255,255,0.6)";
+        steamParticles.forEach(function(p) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+          ctx.fill();
+          });
+        }
+
+       function updateSteam() {
+          steamParticles.forEach(function(p) {
+          p.y -= p.speed;
+          p.x += (Math.random() - 0.5) * 1; // small horizontal drift
+          if (p.y < 50) {
+          p.y = 250;
+          p.x = 200;
+          }
+         });
+        }
+
+       function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          drawBowl();
+          drawSteam();
+          updateSteam();
+          requestAnimationFrame(animate);
+        }
+
+       animate();
+    </script>
+</body>
+</html>
